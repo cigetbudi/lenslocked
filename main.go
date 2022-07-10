@@ -14,8 +14,12 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Contact Page</h1><p>Untuk lebih lanjut, hubungi saya ke <a href=\"mailto:cigetbudi@gmail.com\">cigetbudi@gmail.com</a>.")
 }
 
+func pathHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, r.URL.Path)
+}
+
 func main() {
-	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/", pathHandler)
 	http.HandleFunc("/contact", contactHandler)
 	fmt.Println("Mengaktifkan server di :3000...")
 	http.ListenAndServe(":3000", nil)
