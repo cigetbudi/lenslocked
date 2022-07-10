@@ -15,12 +15,19 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func pathHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, r.URL.Path)
+	switch r.URL.Path {
+	case "/":
+		homeHandler(w, r)
+	case "/contact":
+		contactHandler(w, r)
+	default:
+		// TODO handle the page not found error
+	}
 }
 
 func main() {
 	http.HandleFunc("/", pathHandler)
-	http.HandleFunc("/contact", contactHandler)
+	// http.HandleFunc("/contact", contactHandler)
 	fmt.Println("Mengaktifkan server di :3000...")
 	http.ListenAndServe(":3000", nil)
 }
